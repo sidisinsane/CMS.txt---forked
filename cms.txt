@@ -1,0 +1,39 @@
+/* -------- Website -------- */
+
+name: CMS.txt
+
+/* -------- Sitemap -------- */
+
+
+What it is
+	Changelog [color-scheme:yellow]
+	Contact  [color-scheme:yellow]
+How to use [url:how] [color-scheme:green]
+Get it now [url:download] [color-scheme:red]
+See the themes [url:theming]
+	Cimus [url:preview-cimus]
+		Blue [url:preview-cimus]
+		Green [url:preview-cimus-green] [color-scheme:green]
+		Red [url:preview-cimus-red] [color-scheme:red]
+		Yellow [url:preview-cimus-yellow] [color-scheme:yellow]
+	Cleap [url:preview-cleap] [theme:cleap]
+		Silver [url:preview-cleap]
+		Blue [url:preview-cleap-blue] [color-scheme:blue]
+		Green [url:preview-cleap-green] [color-scheme:green]
+	Dejem [url:preview-dejem] [theme:dejem]
+	Edish [url:preview-edish] [theme:edish]
+		Friendly [url:preview-edish]
+		Blue [url:preview-edish-blue] [color-scheme:blue]
+		Green [url:preview-edish-green] [color-scheme:green]
+		Red [url:preview-edish-red] [color-scheme:red]
+	Kort [url:preview-kort] [theme:kort]
+	Panelo [url:preview-panelo] [theme:panelo]
+	Sandune [url:preview-sandune] [theme:sandune]
+		Sand [url:preview-sandune]
+		Lime [url:preview-sandune-lime] [color-scheme:lime]
+		Aqua [url:preview-sandune-aqua] [color-scheme:aqua]
+		Blush [url:preview-sandune-blush] [color-scheme:blush]
+	Spurt [url:preview-spurt] [theme:spurt]
+		Red [url:preview-spurt]
+		Blue [url:preview-spurt-blue] [color-scheme:blue]
+		Green [url:preview-spurt-green] [color-scheme:green]
