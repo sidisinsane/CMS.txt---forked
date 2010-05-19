@@ -120,7 +120,7 @@ class cms {
 					if (isset($b['selected']) && $b['selected']) {
 						$hold = true;
 						$panel['html']['navigation-level-' . $deep] =  _htmlNavigation($sitemap, $index, $deep);
-						$sitemap = $b['kids'];
+						$sitemap = isset($b['kids'])?$b['kids']:array();
 						$deep++;
 						break;
 					}
@@ -167,10 +167,10 @@ class cms {
 			$h = false;
 			foreach ($sitemap as $a => $b) {
 				$a_ = &$sitemap[$a];
-				if ($a_['selected']) {
-					$c = 'level-' . $deep . ' selected' . (($a_['current']) ? ' current' : '');
+				if (isset($a_['selected']) && $a_['selected']) {
+					$c = 'level-' . $deep . ' selected' . ((isset($a_['current']) && $a_['current']) ? ' current' : '');
 					$h = '<a class="' . $c . '" href="./' . (($a !== $index) ? $a : '') . '"><span>' . $a_['name'] . '</span></a>';
-					if ($a_['current']) {
+					if (isset($a_['current']) && $a_['current']) {
 						return $h;
 					}
 					elseif ($a_['kids']) {
@@ -249,4 +249,3 @@ class cms {
 	}
 }
 $site = new cms();
-?>
