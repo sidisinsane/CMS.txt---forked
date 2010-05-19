@@ -1,4 +1,4 @@
-<?
+<?php
 class cms {
 	function _setup () {
 		function _parsePanel ($parse, $str_in, &$array_out) {
@@ -12,7 +12,7 @@ class cms {
 		}
 		function _parseWebsite ($parse, &$array_out) {
 			_parsePanel($parse, $array_out, $array_out);
-			$opt_default = array(missing=>'missing', theme=>'cimus', template=>'index.html');
+			$opt_default = array('missing'=>'missing', 'theme'=>'cimus', 'template'=>'index.html');
 			$opt = array();
 			foreach ($array_out as $a => $b) {
 				if ($a !== 'opts') {
@@ -23,8 +23,8 @@ class cms {
 				}
 			}
 			$array_out['opts'] = array_merge($opt_default, $opt);
-			$array_out['page'] = strtolower((($_GET['p']) ? $_GET['p'] : 'index'));
-			if ($array_out['opts']['index']) {
+			$array_out['page'] = strtolower(((isset($_GET['p']) && $_GET['p']) ? $_GET['p'] : 'index'));
+			if (isset($array_out['opts']['index']) && $array_out['opts']['index']) {
 				$array_out['index'] = $array_out['opts']['index'];
 				unset($array_out['opts']['index']);
 			}
@@ -66,14 +66,14 @@ class cms {
 						$website['opts'][$page] = $page;
 					}
 				}
-				$opts = array_merge(array(name=>$name), $opts);
+				$opts = array_merge(array('name'=>$name), $opts);
 				$array_deep[$deep] = $page;
 				$array_out_ = &$array_out;
 				for ($b = 0; $b < $deep; $b++) {
 					$opts = array_merge($array_out_[$array_deep[$b]]['opts'], $opts);
 					$array_out_ = &$array_out_[$array_deep[$b]]['kids'];
 				}
-				if ($array_out_['name']) {
+				if (isset($array_out_['name']) && $array_out_['name']) {
 					if (!$array_out_['kids']) {
 						$array_out_['kids'] = array();
 					}
@@ -82,7 +82,7 @@ class cms {
 				else {
 					$array_write = &$array_out_;
 				}
-				$array_write[$page] = array(name=>$name, deep=>$deep, opts=>$opts);
+				$array_write[$page] = array('name'=>$name, 'deep'=>$deep, 'opts'=>$opts);
 				if ($page == $website['page']) {
 					$array_write[$page]['current'] = true;
 				}
@@ -90,14 +90,14 @@ class cms {
 		}
 		function _parsePage (&$sitemap, &$current) {
 			foreach ($sitemap as &$a) {
-				if ($a['kids']) {
+				if (isset($a['kids']) && $a['kids']) {
 					$is_selected = _parsePage($a['kids'], $current);
 					if ($is_selected) {
 						$a['selected'] = true;
 						return true;
 					}
 				}
-				if ($a['current']) {
+				if (isset($a['current']) && $a['current']) {
 					$a['selected'] = true;
 					$current = $a;
 					return true;
@@ -117,7 +117,7 @@ class cms {
 			while ($hold) {
 				$hold = false;
 				foreach ($sitemap as &$b) {
-					if ($b['selected']) {
+					if (isset($b['selected']) && $b['selected']) {
 						$hold = true;
 						$panel['html']['navigation-level-' . $deep] =  _htmlNavigation($sitemap, $index, $deep);
 						$sitemap = $b['kids'];
@@ -138,13 +138,13 @@ class cms {
 			$h = '<ul class="level-' . $deep . '">';
 			foreach ($sitemap as $a => $b) {
 				$a_ = &$sitemap[$a];
-				$c = 'level-' . $deep . (($a_['selected']) ? ' selected' : '') . (($a_['current']) ? ' current' : '');
+				$c = 'level-' . $deep . ((isset($a_['selected']) && $a_['selected']) ? ' selected' : '') . ((isset($a_['current']) && $a_['current']) ? ' current' : '');
 				$h_ = '<li class="' . $c . '"><a class="' . $c . '" href="./' . (($a !== $index) ? $a : '') . '"><span>' . $a_['name'] . '</span></a>';
-				if ($a_['kids']) {
+				if (isset($a_['kids']) && $a_['kids']) {
 					$h_ .= _htmlNavigationSitemap($a_['kids'], $index, $deep + 1);
 				}
 				$h_ .= '</li>';
-				if (!$a_['hidden']) {
+				if (!isset($a_['hidden']) || !$a_['hidden']) {
 					$h .= $h_;
 				}
 			}
@@ -155,8 +155,8 @@ class cms {
 			$h = '<ul class="level-' . $deep . '">';
 			foreach ($sitemap as $a => $b) {
 				$a_ = &$sitemap[$a];
-				$c = 'level-' . $deep . (($a_['selected']) ? ' selected' : '') . (($a_['current']) ? ' current' : '');
-				if (!$a_['hidden']) {
+				$c = 'level-' . $deep . ((isset($a_['selected']) && $a_['selected']) ? ' selected' : '') . ((isset($a_['current']) && $a_['current']) ? ' current' : '');
+				if (!isset($a_['hidden']) || !$a_['hidden']) {
 					$h .= '<li class="' . $c . '"><a class="' . $c . '" href="./' . (($a !== $index) ? $a : '') . '"><span>' . $a_['name'] . '</span></a>';
 				}
 			}
